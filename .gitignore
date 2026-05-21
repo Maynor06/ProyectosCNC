@@ -1,0 +1,71 @@
+# PYTHON
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Virtual envs
+venv/
+.venv/
+env/
+
+# Python env files
+.env
+.env.*
+
+# FASTAPI / GENERATED FILES
+generated/
+uploads/
+*.log
+
+*.gcode
+*.nc
+*.svg
+*.pbm
+*.png
+*.jpg
+*.jpeg
+
+#REACT 
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Frontend env
+cncFrontend/.env
+cncFrontend/.env.*
+
+# IDE / EDITORS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS FILES
+.DS_Store
+Thumbs.db
+
+# DOCKER
+docker-data/
+mongo-data/
+
+# Docker overrides
+docker-compose.override.yml
+
+# NGINX TEMP
+nginx/*.log
+
+#GIT
+*.orig
