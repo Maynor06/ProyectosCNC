@@ -56,3 +56,11 @@ async def complete_job(job_id: str):
     )
 
     return {"message": "Trabajo completado"}
+
+@router.post("/jobs/{job_id}/redraw")
+async def redraw_job(job_id: str):
+    await jobs_collection.update_one(
+        {"_id": ObjectId(job_id)},
+        {"$set": {"status": "ready_to_draw"}}
+    )
+    return {"message": "Trabajo en cola para volver a dibujar"}

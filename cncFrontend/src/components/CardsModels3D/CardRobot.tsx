@@ -70,7 +70,7 @@ const CardRobot = forwardRef<RobotAnimationHandle, { scene: any; animations: any
       }
     });
 
-    return <primitive object={scene} scale={[1.2, 1.2, 1.2]} />;
+    return <primitive object={scene} scale={0.9} />;
   }
 );
 

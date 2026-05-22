@@ -23,9 +23,13 @@ app.mount(
 )
 
 
+from app.api.routes.jobs import router as jobs_router
+from app.api.routes.generate import router as generate_router
+from app.api.routes.cnc import router as cnc_router
+
 app.include_router(jobs_router)
 app.include_router(generate_router)
-
+app.include_router(cnc_router)
 @app.get("/")
 async def root():
     return {"message": "CNC Backend funcionando"}

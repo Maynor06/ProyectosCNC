@@ -81,10 +81,10 @@ export const UploadView: React.FC = () => {
 
       const result = await response.json();
       console.log('Result:', result);
-      
+
       clearInterval(progressInterval);
       setProgress(100);
-      
+
       setTimeout(async () => {
         await fetchJobDetails(result.job_id);
         setStatus('done');
@@ -177,7 +177,7 @@ export const UploadView: React.FC = () => {
           <div className="loading-card-content">
             <h2 className="loading-title">Procesando tu Avatar</h2>
             <p className="loading-subtitle">El robot está vectorizando tu imagen...</p>
-            
+
             <div className="robot-loader-container">
               <Robot ref={robotRef} style={{ width: '100%', height: '100%' }} />
             </div>
@@ -193,7 +193,7 @@ export const UploadView: React.FC = () => {
           <div className="done-card-content">
             <h2>¡Avatar CNC Generado!</h2>
             <p className="success-subtitle">Tu imagen ha sido convertida a vectores para CNC.</p>
-            
+
             <div className="result-comparison">
               <div className="result-image-box">
                 <span className="image-badge">Original</span>
@@ -202,10 +202,10 @@ export const UploadView: React.FC = () => {
               <div className="result-image-box">
                 <span className="image-badge avatar-badge">Avatar CNC</span>
                 {generatedImagePath && (
-                  <img 
-                    src={generatedImagePath} 
-                    alt="Generated" 
-                    className="result-img" 
+                  <img
+                    src={generatedImagePath}
+                    alt="Generated"
+                    className="result-img"
                     onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/150?text=Error')}
                   />
                 )}
@@ -214,10 +214,10 @@ export const UploadView: React.FC = () => {
 
             <div className="result-actions">
               {generatedGcodePath && (
-                <a 
+                <a
                   href={`${API_BASE_URL}/${generatedGcodePath}`}
-                  download 
-                  target="_blank" 
+                  download
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary download-action-btn"
                 >

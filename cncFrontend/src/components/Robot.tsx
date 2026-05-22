@@ -4,9 +4,9 @@ import CardRobot from "./CardsModels3D/CardRobot";
 import { Canvas } from "@react-three/fiber";
 
 interface RobotHandle {
-  saludo: () => void;
-  mostrarBola: () => void;
-  detener: () => void;
+    saludo: () => void;
+    mostrarBola: () => void;
+    detener: () => void;
 }
 
 export const Robot = forwardRef<RobotHandle, { className?: string, style?: React.CSSProperties }>(({ className, style }, ref) => {
@@ -14,14 +14,14 @@ export const Robot = forwardRef<RobotHandle, { className?: string, style?: React
     const cardRobotRef = useRef<any>(null);
 
     useImperativeHandle(ref, () => ({
-      saludo: () => cardRobotRef.current?.saludo(),
-      mostrarBola: () => cardRobotRef.current?.mostrarBola(),
-      detener: () => cardRobotRef.current?.detener(),
+        saludo: () => cardRobotRef.current?.saludo(),
+        mostrarBola: () => cardRobotRef.current?.mostrarBola(),
+        detener: () => cardRobotRef.current?.detener(),
     }), []);
 
     return (
-        <div className={className} style={style || (className ? {} : { height: '100%', width: '100%' })}>
-            <Canvas style={{ height: '100%', width: '100%' }} camera={{ position: [0, 1.5, 4], fov: 45 }}>
+        <div className={className} style={{ width: '100%', height: '100%', ...style }}>
+            <Canvas style={{ height: '100%', width: '100%' }} camera={{ position: [0, 1.5, 4], fov: 50 }}>
                 <ambientLight intensity={1.2} />
                 <pointLight position={[10, 10, 10]} intensity={1.5} />
                 <directionalLight position={[-5, 8, -5]} intensity={0.6} />

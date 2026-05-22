@@ -25,6 +25,19 @@ export const GalleryView: React.FC = () => {
     }
   };
 
+  const handleRedraw = async (jobId: string) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/jobs/${jobId}/redraw`, {
+        method: 'POST',
+      });
+      if (response.ok) {
+        fetchJobs();
+      }
+    } catch (error) {
+      console.error('Error requesting redraw:', error);
+    }
+  };
+
   if (loading) {
     return <div className="loading-state">Cargando galería...</div>;
   }
@@ -79,17 +92,27 @@ export const GalleryView: React.FC = () => {
                 <small>Creado: {new Date(job.created_at).toLocaleString()}</small>
                 <small>Impresiones: {job.print_count}</small>
               </div>
-              {job.gcode_path && (
-                <a 
-                  href={`${API_BASE_URL}/${job.gcode_path}`} 
-                  download 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="download-btn"
-                >
-                  Descargar G-Code
-                </a>
-              )}
+              <div className="footer-actions">
+                {job.gcode_path && (
+                  <a
+                    href={`${API_BASE_URL}/${job.gcode_path}`}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="download-btn"
+                  >
+                    Descargar G-Code
+                  </a>
+                )}
+                {job.status === 'completed' && (
+                  <button
+                    onClick={() => handleRedraw(job._id)}
+                    className="redraw-btn"
+                  >
+                    Volver a Dibujar
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         ))}
