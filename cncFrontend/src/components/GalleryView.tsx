@@ -106,7 +106,7 @@ export const GalleryView: React.FC = () => {
                 )}
                 {job.status === 'completed' && (
                   <button
-                    onClick={() => handleRedraw(job._id)}
+                    onClick={() => handleRedraw(job._id!)}
                     className="redraw-btn"
                   >
                     Volver a Dibujar
