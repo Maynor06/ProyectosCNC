@@ -25,7 +25,10 @@ services:
       - ./generated:/app/generated
 
   frontend:
-    build: ./cncFrontend
+    build:
+      context: ./cncFrontend
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL}
     container_name: cnc_frontend
     restart: always
 
