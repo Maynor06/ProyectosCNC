@@ -51,11 +51,12 @@ def svg_to_gcode(svg_path: str, gcode_path: str, max_width=300, max_height=600):
 
     with open(gcode_path, "w") as f:
 
-        # Configuración inicial
-        f.write("G21\n")          # mm
-        f.write("G90\n")          # absoluto
-        f.write("M5\n")           # pluma arriba
-        f.write("G4 P0.3\n")
+        f.write("G21\n")
+        f.write("G90\n")
+
+        # Pluma arriba al iniciar
+        f.write("M5\n")
+        f.write("G4 P0.05\n")
 
         for layer_id in doc.layers:
 
@@ -70,23 +71,25 @@ def svg_to_gcode(svg_path: str, gcode_path: str, max_width=300, max_height=600):
 
                 start = points[0]
 
-                # mover con pluma arriba
+                # levantar
                 f.write("M5\n")
-                f.write("G4 P0.1\n")
+                f.write("G4 P0.03\n")
+
+                # mover rápido
                 f.write(f"G0 X{start.real:.2f} Y{start.imag:.2f} F13000\n")
 
-                # bajar pluma
+                # bajar
                 f.write("M3 S127\n")
-                f.write("G4 P0.1\n")
+                f.write("G4 P0.03\n")
 
                 # dibujar
                 for p in points:
                     f.write(f"G1 X{p.real:.2f} Y{p.imag:.2f} F13000\n")
 
-                # subir pluma al terminar línea
+                # subir
                 f.write("M5\n")
-                f.write("G4 P0.1\n")
+                f.write("G4 P0.03\n")
 
-        # regresar home con pluma arriba
+        # regresar home
         f.write("G0 X0 Y0\n")
         f.write("M5\n")
