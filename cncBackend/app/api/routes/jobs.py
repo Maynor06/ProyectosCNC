@@ -27,7 +27,7 @@ async def get_jobs():
 async def get_next_job():
 
     job = await jobs_collection.find_one_and_update(
-        {"status": "ready_to_draw"},
+        {"status": {"$in": ["ready_to_draw", "printing"]}},
         {"$set": {"status": "printing"}},
         sort=[("created_at", 1)]
     )
