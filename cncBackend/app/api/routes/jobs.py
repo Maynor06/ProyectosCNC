@@ -36,6 +36,14 @@ async def get_next_job():
         return {"message": "No hay trabajos pendientes"}
 
     job["_id"] = str(job["_id"])
+    
+    # Calculate total lines of the G-code file so the ESP32 doesn't have to download it twice
+    import os
+    if job.get("gcode_path") and os.path.exists(job["gcode_path"]):
+        with open(job["gcode_path"], "r") as f:
+            job["total_lines"] = sum(1 for _ in f)
+    else:
+        job["total_lines"] = 0
 
     return job
 
