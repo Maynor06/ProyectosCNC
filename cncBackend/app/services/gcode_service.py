@@ -67,8 +67,8 @@ def svg_to_gcode(svg_path: str, gcode_path: str, max_width=300, max_height=400):
         f.write("G21\n")  # Unidades en milímetros
         f.write("G90\n")  # Posicionamiento absoluto
 
-        # Pluma arriba al iniciar
-        f.write("M5\n")
+        # Pluma arriba al iniciar (Invertido: M3 S127)
+        f.write("M3 S127\n")
         f.write("G4 P0.05\n")
 
         for layer_id in doc.layers:
@@ -83,26 +83,26 @@ def svg_to_gcode(svg_path: str, gcode_path: str, max_width=300, max_height=400):
                 # Invertir el eje Y (el origen en SVG está arriba, en CNC está abajo)
                 start_y = final_height - start.imag
 
-                # Levantar pluma antes de moverse al inicio del trazo
-                f.write("M5\n")
-                f.write("G4 P0.03\n")
-
-                # Movimiento rápido al punto inicial
-                f.write(f"G0 X{start.real:.2f} Y{start_y:.2f} F13000\n")
-
-                # Bajar pluma
+                # Levantar pluma antes de moverse al inicio del trazo (Invertido: M3 S127)
                 f.write("M3 S127\n")
                 f.write("G4 P0.03\n")
 
-                # Dibujar trayectoria (Eliminado el primer punto redundante)
+                # Movimiento rápido al punto inicial (Velocidad en 12000)
+                f.write(f"G0 X{start.real:.2f} Y{start_y:.2f} F12000\n")
+
+                # Bajar pluma (Invertido: M5)
+                f.write("M5\n")
+                f.write("G4 P0.03\n")
+
+                # Dibujar trayectoria (Velocidad en 12000, Eliminado el primer punto redundante)
                 for p in points[1:]: 
                     p_y = final_height - p.imag
-                    f.write(f"G1 X{p.real:.2f} Y{p_y:.2f} F13000\n")
+                    f.write(f"G1 X{p.real:.2f} Y{p_y:.2f} F12000\n")
 
-                # Levantar pluma al terminar el trazo actual
-                f.write("M5\n")
+                # Levantar pluma al terminar el trazo actual (Invertido: M3 S127)
+                f.write("M3 S127\n")
                 f.write("G4 P0.03\n")
 
         # Regresar a casa de forma segura
         f.write("G0 X0 Y0\n")
-        f.write("M5\n")
+        f.write("M3 S127\n")
