@@ -3,6 +3,7 @@ from app.models.job import Job
 from app.core.database import jobs_collection
 from bson.objectid import ObjectId
 from datetime import datetime
+from app.api.routes.cnc import cnc_state
 
 router = APIRouter()
 
@@ -44,6 +45,10 @@ async def get_next_job():
             job["total_lines"] = sum(1 for _ in f)
     else:
         job["total_lines"] = 0
+
+    cnc_state["status"] = "drawing"
+    cnc_state["progress"] = 0.0
+    cnc_state["current_line"] = 0
 
     return job
 

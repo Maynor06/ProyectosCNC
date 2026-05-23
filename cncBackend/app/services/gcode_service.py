@@ -22,7 +22,7 @@ def get_bounds(doc):
 
     return xmin, ymin, xmax, ymax
 
-def svg_to_gcode(svg_path: str, gcode_path: str, max_width=350, max_height=650):
+def svg_to_gcode(svg_path: str, gcode_path: str, max_width=300, max_height=600):
 
     os.makedirs(os.path.dirname(gcode_path), exist_ok=True)
 

@@ -38,10 +38,6 @@ async def update_progress(update: CNCProgressUpdate):
     if update.grbl_response is not None:
         cnc_state["grbl_response"] = update.grbl_response
 
-    # If the CNC is idle but sends progress, assume it's drawing
-    if cnc_state["status"] == "idle":
-        cnc_state["status"] = "drawing"
-
     return {"message": "Progress updated", "state": cnc_state}
 
 @router.get("/status")
