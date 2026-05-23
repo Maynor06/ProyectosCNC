@@ -71,14 +71,14 @@ def svg_to_gcode(svg_path: str, gcode_path: str, max_width=350, max_height=650):
 
                 start = points[0]
 
-                f.write(f"G0 X{start.real:.2f} Y{start.imag:.2f} F5000\n")
-                f.write("M3 S127\n")
+                f.write(f"G0 X{start.real:.2f} Y{start.imag:.2f} F13000\n")
+                f.write("M5\n")
                 f.write("G4 P0.1\n")
 
                 for p in points:
-                    f.write(f"G1 X{p.real:.2f} Y{p.imag:.2f} F3000\n")
+                    f.write(f"G1 X{p.real:.2f} Y{p.imag:.2f} F13000\n")
 
-                f.write("M5\n")
+                f.write("M3 S127\n")
                 f.write("G4 P0.1\n")
 
         f.write("G0 X0 Y0\n")
