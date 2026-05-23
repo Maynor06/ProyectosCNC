@@ -35,7 +35,7 @@ async def update_progress(update: CNCProgressUpdate):
         cnc_state["y"] = update.y
 
     # If the CNC is idle but sends progress, assume it's drawing
-    if cnc_state["status"] == "idle" and cnc_state["current_line"] > 0:
+    if cnc_state["status"] == "idle":
         cnc_state["status"] = "drawing"
 
     return {"message": "Progress updated", "state": cnc_state}
@@ -60,5 +60,8 @@ async def stop_cnc():
     cnc_state["status"] = "idle"
     cnc_state["progress"] = 0.0
     cnc_state["current_line"] = 0
+    cnc_state["total_lines"] = 0
+    cnc_state["x"] = 0.0
+    cnc_state["y"] = 0.0
     return {"message": "CNC stopped", "state": cnc_state}
 
