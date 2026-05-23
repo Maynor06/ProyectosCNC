@@ -4,7 +4,11 @@ from app.api.routes.generate import router as generate_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI()
+app = FastAPI(
+    docs_url="/docs",
+    openapi_url="/openapi.json",
+    root_path="/api"
+)
 
 app.add_middleware(
     CORSMiddleware,
