@@ -3,7 +3,7 @@ import vpype_cli
 import os
 
 # 1. DEFINE AQUÍ LOS LÍMITES FÍSICOS REALES DE TU MÁQUINA (en mm)
-LIMIT_X = 700.0  # El ancho máximo real de tu área de dibujo
+LIMIT_X = 600.0  # El ancho máximo real de tu área de dibujo
 LIMIT_Y = 1150.0  # El alto máximo real de tu área de dibujo
 
 def get_bounds(doc):
@@ -26,7 +26,7 @@ def get_bounds(doc):
     return xmin, ymin, xmax, ymax
 
 
-def svg_to_gcode(svg_path: str, gcode_path: str, max_width=700, max_height=1000):
+def svg_to_gcode(svg_path: str, gcode_path: str, max_width=600, max_height=1000):
     os.makedirs(os.path.dirname(gcode_path), exist_ok=True)
     final_height = 0.0
 
