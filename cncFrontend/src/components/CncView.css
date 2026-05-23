@@ -93,6 +93,15 @@
   color: #f59e0b;
 }
 
+.text-warning {
+  color: #ef4444;
+  font-family: monospace;
+  font-size: 0.9rem;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
 @keyframes pulse-green {
   0% { text-shadow: 0 0 5px rgba(16, 185, 129, 0.5); }
   50% { text-shadow: 0 0 20px rgba(16, 185, 129, 0.8); }

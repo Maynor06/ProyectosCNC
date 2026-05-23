@@ -11,7 +11,8 @@ cnc_state = {
     "current_line": 0,
     "total_lines": 0,
     "x": 0.0,
-    "y": 0.0
+    "y": 0.0,
+    "grbl_response": ""
 }
 
 class CNCProgressUpdate(BaseModel):
@@ -20,6 +21,7 @@ class CNCProgressUpdate(BaseModel):
     total_lines: Optional[int] = None
     x: Optional[float] = None
     y: Optional[float] = None
+    grbl_response: Optional[str] = None
 
 @router.post("/progress")
 async def update_progress(update: CNCProgressUpdate):
@@ -33,6 +35,8 @@ async def update_progress(update: CNCProgressUpdate):
         cnc_state["x"] = update.x
     if update.y is not None:
         cnc_state["y"] = update.y
+    if update.grbl_response is not None:
+        cnc_state["grbl_response"] = update.grbl_response
 
     # If the CNC is idle but sends progress, assume it's drawing
     if cnc_state["status"] == "idle":

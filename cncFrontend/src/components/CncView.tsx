@@ -9,6 +9,7 @@ interface CncState {
   total_lines: number;
   x: number;
   y: number;
+  grbl_response: string;
 }
 
 export const CncView: React.FC = () => {
@@ -95,6 +96,12 @@ export const CncView: React.FC = () => {
             <span className="info-label">Posición (X, Y):</span>
             <span className="info-value">{cncState.x.toFixed(2)}, {cncState.y.toFixed(2)}</span>
           </div>
+          {cncState.grbl_response && (
+            <div className="info-item grbl-response">
+              <span className="info-label">Respuesta GRBL:</span>
+              <span className="info-value text-warning">{cncState.grbl_response}</span>
+            </div>
+          )}
         </div>
       </div>
 
